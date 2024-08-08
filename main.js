@@ -1,5 +1,6 @@
 const textarea = document.querySelector('.text-area');
 const mensaje = document.querySelector('.mensaje');
+const botonCopiar = document.querySelector('.copiar');
 
 /*La letra "e" es convertida para "enter"
 La letra "i" es convertida para "imes"
@@ -20,6 +21,7 @@ function btnDesencriptar(){
   mensaje.value = textoDesencriptado;
   mensaje.focus();
 }
+
 function encriptar(stringEncriptada){
   let matrizCodigo = [['e', 'enter'], ['i', 'imes'], ['a', 'ai'], ['o', 'ober'], ['u', 'ufat']];
   stringEncriptada = stringEncriptada.toLowerCase();
@@ -43,3 +45,17 @@ function desencriptar(stringDesencriptada){
   }
   return stringDesencriptada;
 }
+
+// Función para copiar el texto al portapapeles utilizando la API moderna
+function copiarAlPortapapeles() {
+  navigator.clipboard.writeText(mensaje.value)
+    .then(() => {
+      alert('Texto copiado al portapapeles'); // Opcional
+    })
+    .catch(err => {
+      console.error('Error al copiar al portapapeles: ', err);
+    });
+}
+
+// Asignación del evento de clic al botón "copiar"
+botonCopiar.addEventListener('click', copiarAlPortapapeles);
